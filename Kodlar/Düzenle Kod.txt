@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace huzurEviotomasyon
+{
+    public partial class Duzenle : Form
+    {
+        public Giris grs;
+        public Duzenle()
+        {
+            InitializeComponent();
+        }
+        SqlConnection con = new SqlConnection(" Data Source=.;Initial Catalog=HuzurEviOtomasyonu;Integrated Security=True");
+        SqlCommand komut = new SqlCommand();
+        private void Duzenle_Load(object sender, EventArgs e)
+        {
+            textBox1.Text = grs.ynk.dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            textBox2.Text = grs.ynk.dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            textBox3.Text = grs.ynk.dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            comboBox4.Text = grs.ynk.dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            textBox8.Text = grs.ynk.dataGridView1.CurrentRow.Cells[6].Value.ToString();
+            textBox12.Text = grs.ynk.dataGridView1.CurrentRow.Cells[7].Value.ToString();
+            comboBox1.Text = grs.ynk.dataGridView1.CurrentRow.Cells[8].Value.ToString();
+            comboBox2.Text = grs.ynk.dataGridView1.CurrentRow.Cells[9].Value.ToString();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Trim() != "" && textBox2.Text.Trim() != "" && textBox3.Text.Trim() != "")
+            {
+
+
+                con.Open();
+                komut.Connection = con;
+                komut.CommandText = "Update Yenikayit Set Ad='" + textBox2.Text + "',Soyad='" + textBox3.Text + "',DogumYeri='" + comboBox4.Text + "',BabaAdi='" + textBox8.Text + "',AnneAdi='" + textBox12.Text + "',Cinsiyet='" + comboBox1.Text + "',EgitimDurum='" + comboBox2.Text + "' where KimlikNo='" + textBox1.Text + "'";
+                komut.ExecuteNonQuery();
+                con.Close();
+                grs.ynk.listele();
+                MessageBox.Show("Güncelleme Ýþlemi Gerçekleþti...");
+                this.Close();
+            }
+            else 
+            {
+                MessageBox.Show("Boþ alan býrakmayýnýz");
+            }
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int secilen = comboBox3.SelectedIndex;
+            switch (secilen)
+            {
+                case 0: pictureBox1.Image = Resimler.resim_1; break;
+                case 1: pictureBox1.Image = Resimler.resim_2; break;
+                case 2: pictureBox1.Image = Resimler.resim_3; break;
+                case 3: pictureBox1.Image = Resimler.resim_4; break;
+                case 4: pictureBox1.Image = Resimler.resim_5; break;
+                default:
+                    pictureBox1.Image = Resimler.resim_6; break;
+
+            }
+        }
+    }
+}

@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace huzurEviotomasyon
+{
+    class TckimlikNo
+    {
+        //11 haneden oluþan, 1., 3., 5.,7. ve 9. rakamlarýnýn toplamýnýn 7 katý ile 2., 4., 6. ve 8. rakamlarýnýn toplamýnýn 9 katýnýn toplamýnýn birler basamaðý bize 10. rakamý vermekte. 1., 3., 5., 7. ve 9. rakamlarýnýn toplamýnýn 8 katýnýn birler basamaðý da 11. rakamý vermekte.
+        private int OnuncuNumara(string tcno)
+        {
+            int teklerToplam = 0, ciftlerToplam = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                if ((i % 2) == 0)
+                {
+                    teklerToplam = teklerToplam + int.Parse(tcno[i].ToString());
+                }
+                else 
+                {
+                    ciftlerToplam = ciftlerToplam + int.Parse(tcno[i].ToString());
+                }
+            
+            }
+            return (((teklerToplam * 7) + (ciftlerToplam * 9)) % 10);
+        
+        }
+        private int OnbirinciNumara(string tcno)
+        {
+            int toplam = 0;
+            for (int i = 0; i < 9; i = i + 2)
+            {
+                toplam = toplam + int.Parse(tcno[i].ToString());
+            }
+            return (toplam * 8) % 10;
+        }
+        public bool TcNoSorgula(string tckimlikNo)
+        {
+            if ((Convert.ToInt64(tckimlikNo) < 10000000000) || (Convert.ToInt64(tckimlikNo) > 99999999999))
+            {
+                return false;
+            }
+            else if (int.Parse(tckimlikNo[9].ToString()) != (OnuncuNumara(tckimlikNo)))
+            {
+                return false;
+
+            }
+            else if (int.Parse(tckimlikNo[10].ToString()) != OnbirinciNumara(tckimlikNo))
+            {
+                return false;
+
+            }
+            return true;
+        }
+    }
+}
+

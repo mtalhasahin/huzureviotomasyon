@@ -1,0 +1,10 @@
+iki kulllnýcý var 
+yönetici olarak; 
+kullanýcý adý: talha
+þifre:123456
+
+doktor olarak:
+kulanýcý adý:omer
+þifre:1234
+
+veri tabaný huzureviotomasyon dosyasýnýn içindedir.

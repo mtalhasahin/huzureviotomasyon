@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+namespace huzurEviotomasyon
+{
+    public partial class Menu : Form
+    {
+        
+        public Giris grs;
+       
+        
+        public Menu()
+        {
+            InitializeComponent();
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Menu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult sonuc = MessageBox.Show("Kapatmak istediðinize emin misiniz", "Kapatma Ekraný", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (sonuc == DialogResult.OK)
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void sakinKaydýToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            grs.ynk.ShowDialog();
+            
+            
+            
+        }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ilaçTakipToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            grs.Itk.ShowDialog();
+        }
+
+        private void ziyaretçilerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            grs.zt.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void yedekleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SqlConnection baglanti = new SqlConnection();
+            baglanti.ConnectionString = " Data Source=.;Initial Catalog=HuzurEviOtomasyonu;Integrated Security=True";
+            string komutcumle = "backup database HuzurEviOtomasyonu to disk='yedekle'";
+            SqlCommand komut = new SqlCommand(komutcumle, baglanti);
+            baglanti.Open();
+            komut.ExecuteNonQuery();
+            baglanti.Close();
+        }
+    }
+}

@@ -1,0 +1,131 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace huzurEviotomasyon
+{
+    public partial class Giris : Form
+    {
+        public Duzenle dzn;
+        public IlacTakipKaydý Itk;
+        public Menu mnu;
+        public YeniKayit ynk;
+        public ZiyaretciTakip zt;
+        
+        public Giris()
+        {
+            InitializeComponent();
+            dzn = new Duzenle();
+            Itk = new IlacTakipKaydý();
+            mnu = new Menu();
+            ynk = new YeniKayit();
+            zt = new ZiyaretciTakip();
+            dzn.grs = this;
+            Itk.grs = this;
+            mnu.grs = this;
+            ynk.grs = this;
+            zt.grs =  this;
+
+            
+        }
+        public string kullanici;
+        void baglantim() 
+        {
+            string kadi = txtKadi.Text;
+            string sifre = txtSifre.Text;
+            if (txtKadi.Text == "" && txtSifre.Text == "")
+            {
+                MessageBox.Show("Kullanýcý Adý veya Þifre Boþ Girilemez...");
+            }
+            try
+            {
+                if (kadi != "" && sifre != "") 
+                {
+
+                    SqlConnection baglanti = new SqlConnection();
+                    baglanti.ConnectionString = " Data Source=.;Initial Catalog=HuzurEviOtomasyonu;Integrated Security=True";
+                    SqlCommand sorgu = new SqlCommand("SELECT KullaniciAdi,Sifre FROM KullaniciGiris", baglanti);
+                    SqlDataReader okuyucu;
+                    bool onay = false;
+                    try
+                    {
+                        baglanti.Open();
+                        okuyucu = sorgu.ExecuteReader();
+                        while (okuyucu.Read())
+                        {
+                            if ((kadi == okuyucu["KullaniciAdi"].ToString()) && (sifre == okuyucu["Sifre"].ToString()))
+                            {
+
+                                onay = true;
+                                break;// veri tabanýyla doðru ise kullanýcý giriþi yap
+                            }
+                        }
+                        baglanti.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    if (onay == true)
+                    {
+                        kullanici = kadi;
+                        mnu.label2.Text = kullanici;
+                        mnu.Show();
+
+                        this.Hide();
+
+                    }
+                    else
+                    {
+                        baglanti.Close();
+                        MessageBox.Show("Kullanýcý Adý ve Þifreyi Yanlýþ Girdiniz", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtKadi.Text = "";
+                        txtSifre.Text = "";
+                    }
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.ToString());
+               
+            }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            baglantim();
+        }
+
+        private void Giris_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
+
+        private void Giris_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+    }
+}

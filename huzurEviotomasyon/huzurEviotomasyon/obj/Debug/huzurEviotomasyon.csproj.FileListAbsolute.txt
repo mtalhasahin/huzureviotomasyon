@@ -1,0 +1,16 @@
+c:\users\dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\bin\Debug\huzurEviotomasyon.exe.config
+c:\users\dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\bin\Debug\huzurEviotomasyon.exe
+c:\users\dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\bin\Debug\huzurEviotomasyon.pdb
+c:\users\dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.Properties.Resources.resources
+c:\users\dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.csproj.GenerateResource.Cache
+c:\users\dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.exe
+c:\users\dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.pdb
+C:\Users\Dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.csprojResolveAssemblyReference.cache
+C:\Users\Dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.YeniKayit.resources
+C:\Users\Dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.ZiyaretciTakip.resources
+C:\Users\Dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.Giris.resources
+C:\Users\Dell\Documents\Visual Studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.IlacTakipKaydı.resources
+C:\Users\Dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.Duzenle.resources
+C:\Users\Dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.Resimler.resources
+C:\Users\Dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.Doktor.resources
+C:\Users\Dell\documents\visual studio 2012\Projects\huzurEviotomasyon\huzurEviotomasyon\obj\Debug\huzurEviotomasyon.Raporla.resources

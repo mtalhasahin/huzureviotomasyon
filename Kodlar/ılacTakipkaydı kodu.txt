@@ -1,0 +1,113 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace huzurEviotomasyon
+{
+    public partial class IlacTakipKaydý : Form
+    {
+        public Giris grs;
+        SqlConnection con = new SqlConnection(" Data Source=.;Initial Catalog=HuzurEviOtomasyonu;Integrated Security=True");
+        SqlCommand kmt = new SqlCommand();
+        DataTable dt = new DataTable();
+        public IlacTakipKaydý()
+        {
+            InitializeComponent();
+        }
+        public void ListeleIlac()
+        {
+            dt.Clear();
+            SqlDataAdapter da = new SqlDataAdapter("Select *From IlacTakip", con);
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+        
+        }
+       
+
+        public void Sil()
+        {
+            DialogResult cevap;
+            cevap = MessageBox.Show("Silmek Ýstediðinize Emin Misiniz?", "Silme Menüsü", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (cevap == DialogResult.Yes)
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                con.Open();
+                cmd.Connection = con;
+                cmd.CommandText = "Delete From IlacTakip where Ad='" + dataGridView1.CurrentRow.Cells[1].Value.ToString() + "' "; //Silme iþlemi Ad'a No ya göre gerçekleþti
+                cmd.ExecuteNonQuery();
+                con.Close();
+                ListeleIlac();
+                MessageBox.Show("Silme iþlemi gerçekleþtirdi...");
+            }
+        
+        }
+        
+
+        private void IlacTakipKaydý_Load(object sender, EventArgs e)
+        {
+            ListeleIlac();
+            con.Open();
+            SqlCommand com = new SqlCommand("select Ad,Soyad from Yenikayit", con);
+            com.CommandType = CommandType.Text;
+            SqlDataReader dr;
+            dr = com.ExecuteReader();
+            while (dr.Read())
+            {
+
+                comboBox5.Items.Add(dr["Ad"]);
+                comboBox4.Items.Add(dr["Soyad"]);
+
+
+            }
+            con.Close();
+            
+        }
+
+        private void btnYenitakipkaydet_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            string BaslamaTarih=maskedTextBox1.Text;
+            string BitirmeTarih = maskedTextBox2.Text;
+            kmt.Connection = con;
+            kmt.CommandText = "Insert Into IlacTakip(Ad,Soyad,Ilac,ReceteTuru,AcTok,BaslamaTarih,BitirmeTarih)Values('"+comboBox5.Text+"','"+comboBox4.Text+"','"+comboBox1.Text+"','"+comboBox2.Text+"','"+comboBox3.Text+"','"+maskedTextBox1.Text+"','"+maskedTextBox2.Text+"')";
+            kmt.ExecuteNonQuery();
+            con.Close();
+            ListeleIlac();
+            MessageBox.Show("kayýt iþlemleri gerçekleþmiþtir..");
+           
+        }
+            
+        
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Sil();
+        }
+
+        private void IlacTakipKaydý_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult sonuc = MessageBox.Show("Kapatmak istediðinize emin misiniz", "Kapatma Ekraný", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (sonuc == DialogResult.OK)
+            {
+                
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void btnYenitakipiptal_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+    }
+}
